@@ -1,0 +1,69 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title><%= @which %> &mdash; cloudexchange.org</title>
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/text.css" />
+  <link rel="stylesheet" href="/css/960.css" />
+  <style>
+    h1 { font-size: 350%; }
+    h2 { font-size: 220%; }
+    h3 { font-size: 110%; }
+  </style>
+</head>
+
+<body>  
+  <div class="container_12">
+
+  	<div class="grid_12">
+      <h1>cloud exchange</h1>      
+      <h2><%= @which %></h2>
+  	</div>
+
+  	<div class="clear"></div>
+
+  	<div class="grid_9">
+
+      <script type="text/javascript" src="/amstock/swfobject.js"></script>
+      <div id="flashcontent">
+        <strong>You need to upgrade your Flash Player</strong>
+      </div>
+
+    	<script type="text/javascript">
+    		var so = new SWFObject("/amstock/amstock.swf", "amstock", "700", "400", "8", "#FFFFFF");
+    		so.addVariable("path", "/data/");
+    		so.addVariable("settings_file", encodeURIComponent("/charts/<%= @which %>.xml"));
+    		so.addVariable("preloader_color", "#999999");
+    		so.write("flashcontent");
+    	</script>
+  	</div>
+ 
+    <% @regions.each do |region| %>
+   	  <div class="grid_1">
+      <h3><%= region %></h3>
+      <% @systems.each do |system| %>
+        <% @instances.each do |instance| %>
+          <% which = "#{region}.#{system}.#{instance}" %>
+          <a href="/charts/<%= which %>.html"><%= instance %></a><br>
+        <% end %>
+      <% end %>
+      </div>
+    <% end %>
+
+  </div>
+  
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-2260866-6");
+      pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+
+</body>
+
+</html>

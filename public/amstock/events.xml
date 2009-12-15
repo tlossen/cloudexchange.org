@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events>
+  <!-- copy <event>..</event> as many times as you need -->
+  
+  <!-- event id (eid) is passed to a javascript function, when you roll over or click on an event bullet. If
+  you are not using this, you can not specify "eid" -->
+  <event eid="0">
+    <!-- as there can be any number of charts, you have to specify chart_id. If the chart_id is not specified,
+    the event is assigned to the first chart. chart id can be set in settings file, as cid attribute: 
+    <chart cid="first"> In case you don't set the cid for the chart, then the cid is assigned automaticaly, 
+    counting from 0 -->
+    <chart_id></chart_id>
+    
+    <!-- as there can be any number of graphs, you have to specify graph_id. If the graph_id is not specified,
+    the event is assigned to the first graph. graph id can be set in settings file, as gid attribute: 
+    <graph gid="first"> In case you don't set the gid for the graph, then the gid is assigned automaticaly, 
+    counting from 0. If your event must not be bounded to some graph (for example, if you want to have
+    horizontal lines or event bullets at some specified value), set "none" here-->
+    <graph_id></graph_id>
+    
+    <!-- [left] (left / right) If you set the graph_id to "none", you must set the axis of the event here -->
+    <y_axis></y_axis>
+    
+    <!-- date of the event. You have to use the same date format as set in data_set settings -->
+    <date></date>
+    
+    <!-- [settings.charts.chart.events.bullet] (sign/flag/pin/round/square/round_outlined/square_outlined/
+    round_outline/square_outline/horizontal_line/vertical_line/horizontal_line_dashed/vertical_line_dashed/
+    arrow_up/arrow_down/triangle_left/triangle_right)
+    In case you want to have different bullet, you can set it here -->
+    <bullet></bullet>
+    
+    <!-- [] (number) In case you do not assign the event to any graph, the value at which the event must
+    be displayed should be set here. -->
+    <value></value>
+
+    <!-- [] (number) In case you do not assign the event to any graph, and you do comparing of the data 
+    sets, the percent value at which the event must be displayed should be set here. -->    
+    <percent_value></percent_value>    
+    
+    <!-- [settings.charts.chart.events.color] (hex code) -->
+    <color></color>
+    
+    <!-- [settings.charts.chart.events.border_color] (hex code) -->
+    <border_color></border_color>
+    
+    <!-- [settings.charts.chart.events.border_alpha] (hex code) -->
+    <border_alpha></border_alpha>    
+    
+    <!-- [settings.charts.chart.events.text_color] (hex code) -->
+    <text_color></text_color>    
+    
+    <!-- [] (Symbol) only sign, flag, pin and horizontal_line bullets can display letters. -->
+    <letter></letter>
+    
+    <!-- [] (Text) -->
+    <description><![CDATA[Dividends]]></description>
+    
+    <!-- [false] (true / false) In case you want your bullet to be displayed on axis, set true here -->
+    <axis></axis>
+    
+    <!-- [12] (Number) size of bullet -->
+    <size></size>
+    
+    <!-- [] (url) You can make the event to work as a link to some web page -->
+    <url></url>
+  </event> 
+    
+</events>

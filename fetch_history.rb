@@ -2,6 +2,9 @@
 
 require 'time'
 
+#DATA_DIR = "/home/ubuntu/cloudexchange.org/www/data"
+DATA_DIR = "/Users/tlossen/Code/cloudexchange.org/public/data"
+
 def fetch(region)
   puts "#{Time.now} - fetching #{region}"
 

@@ -32,7 +32,7 @@ end
 ['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|
   data = fetch(region)  
   data.keys.each do |type|
-    open("public/data/#{region}.#{type}.csv", 'w') do |file|
+    open("#{DATA_DIR}/#{region}.#{type}.csv", 'w') do |file|
       data[type].each do |stamp, price|
         file.puts "#{stamp.strftime('%Y-%m-%d %H:%M:%S')},#{price}"
       end

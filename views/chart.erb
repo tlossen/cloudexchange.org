@@ -7,9 +7,13 @@
   <link rel="stylesheet" href="/css/text.css" />
   <link rel="stylesheet" href="/css/960.css" />
   <style>
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
     h1 { font-size: 350%; }
     h2 { font-size: 220%; }
     h3 { font-size: 110%; }
+    .navigation { margin-top: 2em; }
+    .footer { margin-top: 4em; font-size: 70%; text-align: right; }
   </style>
 </head>
 
@@ -23,7 +27,7 @@
 
   	<div class="clear"></div>
 
-  	<div class="grid_9">
+  	<div class="grid_8">
 
       <script type="text/javascript" src="/amstock/swfobject.js"></script>
       <div id="flashcontent">
@@ -31,7 +35,7 @@
       </div>
 
     	<script type="text/javascript">
-    		var so = new SWFObject("/amstock/amstock.swf", "amstock", "700", "400", "8", "#FFFFFF");
+    		var so = new SWFObject("/amstock/amstock.swf", "amstock", "620", "400", "8", "#FFFFFF");
     		so.addVariable("path", "/data/");
     		so.addVariable("settings_file", encodeURIComponent("/charts/<%= @which %>.xml"));
     		so.addVariable("preloader_color", "#999999");
@@ -40,16 +44,34 @@
   	</div>
  
     <% @regions.each do |region| %>
-   	  <div class="grid_1">
-      <h3><%= region %></h3>
+   	  <div class="grid_1 navigation">
+      <p><%= region %></p>
       <% @systems.each do |system| %>
+        <p>
         <% @instances.each do |instance| %>
           <% which = "#{region}.#{system}.#{instance}" %>
           <a href="/charts/<%= which %>.html"><%= instance %></a><br>
         <% end %>
+        </p>
       <% end %>
       </div>
     <% end %>
+
+ 	  <div class="grid_1 navigation">
+      <p>&nbsp;</p>
+      <p>linux<br><br><br><br><br><br><br></p>
+      <p>windows</p>
+    </div>
+    
+    <div class="clear"></div>
+ 
+  	<div class="grid_8 footer">
+      visualization: <a href="http://www.timlossen.com">tim lossen</a>
+      &mdash; 
+      data: <a href="http://aws.amazon.com/">amazon web services</a> 
+      <br>
+  	  <i><sup>*</sup> times shown are <a href="http://en.wikipedia.org/wiki/UTC">UTC</a> (= london)</i>
+  	</div>
 
   </div>
   

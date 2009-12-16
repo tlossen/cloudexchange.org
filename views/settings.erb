@@ -642,7 +642,7 @@
            -->  				
   		    <legend>
             <date key="false" title="false"><![CDATA[{close}]]></date>
-            <period key="false" title="false"><![CDATA[min:<b>{low}</b> -- max:<b>{high}</b>]]></period>
+            <period key="false" title="false"><![CDATA[min: $ <b>{low}</b> - max: $ <b>{high}</b>]]></period>
             <date_comparing key="false" title="false"><![CDATA[]]></date_comparing>
             <period_comparing key="false" title="false"><![CDATA[]]></period_comparing>
             
@@ -812,7 +812,7 @@
     <date_format></date_format>
     
     <!-- [true] (true / false) whether to show custom period input fields or not -->
-    <custom_period_enabled></custom_period_enabled>    
+    <custom_period_enabled>false</custom_period_enabled>    
     
     <!-- [bottom] (top / bottom) period selector position -->
     <position>bottom</position>
@@ -896,13 +896,14 @@
     periods can have selected="true" attribute - this period will be selected when chart is loaded.    
     -->
 		<periods>		
-      <period type="DD" count="10">10D</period>
-    	<period type="MM" count="1">1M</period>
-    	<period type="MM" count="3">3M</period>
-    	<period selected="true" type="YYYY" count="1">1Y</period>
-    	<period type="YYYY" count="3">3Y</period>
-    	<period type="YTD" count="0">YTD</period>
-    	<period type="MAX">MAX</period>
+      <period type="DD" count="1">24h</period>
+      <period type="DD" count="7">7d</period>
+      <!-- <period type="MM" count="1">1M</period>
+      <period type="MM" count="3">3M</period>
+      <period selected="true" type="YYYY" count="1">1Y</period>
+      <period type="YYYY" count="3">3Y</period>
+      <period type="YTD" count="0">YTD</period> -->
+    	<period selected="true" type="MAX">all</period>
 		</periods>
 		
 		<!-- [true] (true / false) If you set this to false, then the period buttons, except the one with 
@@ -910,7 +911,7 @@
 		<zoom_to_end></zoom_to_end>
 		
 		<!-- [] (text) -->
-		<periods_title>Zoom:</periods_title>
+		<periods_title></periods_title>
 		
 		<!-- [] (text) -->
 		<custom_period_title>Custom period:</custom_period_title>

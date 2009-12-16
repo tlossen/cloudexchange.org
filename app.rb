@@ -7,8 +7,8 @@ get '/' do
 end
 
 get '/charts/:which.html' do
-  @regions = ['eu-west-1', 'us-east-1', 'us-west-1']
-  @systems = ['linux']
+  @regions = ['us-east-1', 'us-west-1', 'eu-west-1']
+  @systems = ['linux', 'windows']
   @instances = ['m1.small', 'm1.large', 'm1.xlarge', 'c1.medium', 'c1.xlarge', 'm2.2xlarge', 'm2.4xlarge']
   @which = params[:which]
   erb :chart

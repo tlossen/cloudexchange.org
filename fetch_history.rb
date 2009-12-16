@@ -14,14 +14,20 @@ def fetch(region)
     inst = col[3]
     os = col[4].split('/')[0].downcase
     type = "#{os}.#{inst}"
-    data[type] ||= []
-    data[type] << [stamp, price]
+    values = data[type] ||= []
+    values << [stamp - 1, values.last[1]] unless values.empty?
+    values << [stamp, price]
   end
+
+  data.each do |type, values|
+    values << [Time.now.utc, values.last[1]]
+  end
+
   data
 end
 
 ['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|
-  data = fetch(region)
+  data = fetch(region)  
   data.keys.each do |type|
     open("public/data/#{region}.#{type}.csv", 'w') do |file|
       data[type].each do |stamp, price|

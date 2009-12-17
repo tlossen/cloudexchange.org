@@ -19,6 +19,9 @@ def store(region, data)
         file.puts "#{stamp.strftime('%Y-%m-%d %H:%M:%S')},#{price}"
       end
     end
+    open("#{DATA_DIR}/#{region}.#{type}.txt", 'w') do |file|
+      file.puts data[type].last[1]
+    end
   end
 end
 

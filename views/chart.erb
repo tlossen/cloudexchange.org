@@ -14,6 +14,7 @@
     h3 { font-size: 110%; }
     .navigation { margin-top: 2em; }
     .footer { margin-top: 4em; font-size: 70%; text-align: right; }
+    .invisible { display: none; }
   </style>
 </head>
 
@@ -28,7 +29,6 @@
   	<div class="clear"></div>
 
   	<div class="grid_8">
-
       <script type="text/javascript" src="/amstock/swfobject.js"></script>
       <div id="flashcontent">
         <strong>You need to upgrade your Flash Player</strong>
@@ -41,6 +41,10 @@
     		so.addVariable("preloader_color", "#999999");
     		so.write("flashcontent");
     	</script>
+    	
+    	<p>
+  	    <a href="/data/<%= @which %>.csv">download data</a>
+  	  </p>
   	</div>
  
     <% @regions.each do |region| %>
@@ -75,6 +79,12 @@
 
   </div>
   
+  <div class="invisible">
+	  <a href="/charts/<%= @which %>.xml">settings</a>
+	  <a href="/favicon.ico">favicon</a>
+	  <a href="/amstock/amstock.swf">flash</a>
+	</div>
+	
   <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

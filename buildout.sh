@@ -49,8 +49,19 @@ vi .profile
 
   export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
   export EC2_URL=https://eu-west-1.ec2.amazonaws.com
-  export EC2_PRIVATE_KEY=~/pk-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
-  export EC2_CERT=~/cert-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
+  export EC2_PRIVATE_KEY=~/.ec2/pk-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
+  export EC2_CERT=~/.ec2/cert-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
   export EC2_HOME=~/ec2-api-tools-1.3-46266
   export PATH=$EC2_HOME/bin:$PATH
 
+#cronjob
+crontab -e
+
+  JAVA_HOME=/usr/lib/jvm/java-6-openjdk
+  EC2_URL=https://eu-west-1.ec2.amazonaws.com
+  EC2_PRIVATE_KEY=/home/ubuntu/.ec2/pk-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
+  EC2_CERT=/home/ubuntu/.ec2/cert-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
+  EC2_HOME=/home/ubuntu/ec2-api-tools-1.3-46266
+  PATH=/home/ubuntu/ec2-api-tools-1.3-46266/bin:/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin
+
+  */5 * * * * /home/ubuntu/cloudexchange.org/fetch_history.rb >> /home/ubuntu/cloudexchange.org/cron.log 2>&1

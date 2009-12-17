@@ -5,6 +5,24 @@ require 'time'
 #DATA_DIR = "/home/ubuntu/cloudexchange.org/www/data"
 DATA_DIR = "/Users/tlossen/Code/cloudexchange.org/public/data"
 
+
+def store(region, data)
+  # open("#{DATA_DIR}/#{region}.csv", 'w') do |file|
+  #   data.each do |type, values|
+  #     file.puts "#{type},#{values.last[1]}"
+  #   end
+  # end
+
+  data.keys.each do |type|
+    open("#{DATA_DIR}/#{region}.#{type}.csv", 'w') do |file|
+      data[type].each do |stamp, price|
+        file.puts "#{stamp.strftime('%Y-%m-%d %H:%M:%S')},#{price}"
+      end
+    end
+  end
+end
+
+
 def fetch(region)
   puts "#{Time.now} - fetching #{region}"
 
@@ -29,16 +47,7 @@ def fetch(region)
   data
 end
 
-['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|
-  data = fetch(region)  
-  data.keys.each do |type|
-    open("#{DATA_DIR}/#{region}.#{type}.csv", 'w') do |file|
-      data[type].each do |stamp, price|
-        file.puts "#{stamp.strftime('%Y-%m-%d %H:%M:%S')},#{price}"
-      end
-    end
-  end
+
+['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|   
+  store(region, fetch(region))
 end
-
-
-

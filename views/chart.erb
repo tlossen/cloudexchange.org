@@ -25,7 +25,7 @@
       <h1>cloud exchange</h1>     
       
       <!--# block name="empty" --><!--# endblock -->
-      <h2><%= @which %> &mdash; $<!--# include file="data/<%= @which %>.txt" stub="empty" --></h2>
+      <h2><%= @which %> &mdash; $<!--# include virtual="/data/<%= @which %>.txt" stub="empty" --></h2>
   	</div>
 
   	<div class="clear"></div>

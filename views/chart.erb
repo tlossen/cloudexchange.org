@@ -37,8 +37,9 @@
     	<script type="text/javascript">
     		var so = new SWFObject("/amstock/amstock.swf", "amstock", "620", "400", "8", "#FFFFFF");
     		so.addVariable("path", "/data/");
-    		so.addVariable("settings_file", encodeURIComponent("/charts/<%= @which %>.xml"));
+    		so.addVariable("settings_file", encodeURIComponent("/amstock/settings.xml"));
     		so.addVariable("preloader_color", "#999999");
+    		so.addVariable("additional_chart_settings", "<settings><data_sets><data_set did='0'><file_name><%= @which %>.csv</file_name></data_set></data_sets></settings>");
     		so.write("flashcontent");
     	</script>
     	
@@ -80,9 +81,9 @@
   </div>
   
   <div class="invisible">
-	  <a href="/charts/<%= @which %>.xml">settings</a>
-	  <a href="/favicon.ico">favicon</a>
-	  <a href="/amstock/amstock.swf">flash</a>
+	  <a href="/favicon.ico">.</a>
+	  <a href="/amstock/amstock.swf">.</a>
+	  <a href="/amstock/settings.xml">.</a>
 	</div>
 	
   <script type="text/javascript">

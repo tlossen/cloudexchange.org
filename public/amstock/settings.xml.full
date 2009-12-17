@@ -118,11 +118,11 @@
   <data_sets> 
 
       <data_set did="0">
-         <title><%= @which %></title>
+         <title></title>
          <short></short>
          <color></color>
          <description><![CDATA[]]></description> 
-         <file_name><%= @which %>.csv</file_name>
+         <file_name></file_name>
          <events_file_name></events_file_name>
          <main_drop_down selected="true"></main_drop_down> 	    	  
          <compare_list_box selected="false"></compare_list_box>

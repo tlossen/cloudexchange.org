@@ -20,11 +20,11 @@
   <reset_period></reset_period>
  </data_reloading>
  <number_format>
-  <decimal_separator></decimal_separator>
+  <decimal_separator>.</decimal_separator>
   <thousand_separator></thousand_separator>
   <digits_after_decimal>
    <percents></percents>
-   <data></data>
+   <data>3</data>
    <averages></averages>
   </digits_after_decimal>
   <letters>

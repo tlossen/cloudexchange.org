@@ -1,15 +1,17 @@
 <html>
-
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="author" content="Tim Lossen" />
-	<meta name="description" content="realtime charts of amazon ec2 spot prices" />
-	<meta name="keywords" content="amazon, aws, ec2, spot price, pricing, charts, visualization, cloud computing" />
-	<meta name="robots" content="all">
+  <meta name="description" content="realtime charts of amazon ec2 spot prices" />
+  <meta name="keywords" content="amazon, aws, ec2, spot price, pricing, charts, visualization, cloud computing" />
+  <meta name="robots" content="all">
   <title><%= @which %> &mdash; cloud exchange</title>
   <link rel="stylesheet" href="/css/reset.css" />
   <link rel="stylesheet" href="/css/text.css" />
   <link rel="stylesheet" href="/css/960.css" />
+  <link rel="icon" type="image/ico" href="/favicon.ico"/>
+  <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
+
   <style>
     a { text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -25,13 +27,13 @@
 <body>  
   <div class="container_12">
 
-  	<div class="grid_12">
+    <div class="grid_12">
       <h1>cloud exchange</h1>     
       <!--# block name="empty" --><!--# endblock -->
       <h2><%= @which %> &mdash; $<!--# include virtual="/data/<%= @which %>.txt" stub="empty" --></h2>
-  	</div>
+    </div>
 
-  	<div class="clear"></div>
+    <div class="clear"></div>
 
   	<div class="grid_8">
       <script type="text/javascript" src="/amstock/swfobject.js"></script>
@@ -39,57 +41,57 @@
         <strong>You need to upgrade your Flash Player</strong>
       </div>
 
-    	<script type="text/javascript">
-    		var so = new SWFObject("/amstock/amstock.swf", "amstock", "620", "400", "8", "#FFFFFF");
-    		so.addVariable("path", "/data/");
-    		so.addVariable("settings_file", encodeURIComponent("/amstock/settings.xml"));
-    		so.addVariable("preloader_color", "#999999");
-    		so.addVariable("additional_chart_settings", "<settings><data_sets><data_set did='0'><file_name><%= @which %>.csv</file_name></data_set></data_sets></settings>");
-    		so.write("flashcontent");
-    	</script>
-    	
-    	<p>
-  	    <a href="/data/<%= @which %>.csv">download data</a>
-  	  </p>
-  	</div>
+      <script type="text/javascript">
+      	var so = new SWFObject("/amstock/amstock.swf", "amstock", "620", "400", "8", "#FFFFFF");
+      	so.addVariable("path", "/data/");
+      	so.addVariable("settings_file", encodeURIComponent("/amstock/settings.xml"));
+      	so.addVariable("preloader_color", "#999999");
+      	so.addVariable("additional_chart_settings", "<settings><data_sets><data_set did='0'><file_name><%= @which %>.csv</file_name></data_set></data_sets></settings>");
+      	so.write("flashcontent");
+      </script>
+
+      <p>
+        <a href="/data/<%= @which %>.csv">download data</a>
+      </p>
+    </div>
  
     <% @regions.each do |region| %>
-   	  <div class="grid_1 navigation">
-      <p><%= region %></p>
-      <% @systems.each do |system| %>
+      <div class="grid_1 navigation">
+        <p><%= region %></p>
+        <% @systems.each do |system| %>
         <p>
         <% @instances.each do |instance| %>
           <% which = "#{region}.#{system}.#{instance}" %>
           <a href="/charts/<%= which %>.html"><%= instance %></a><br>
         <% end %>
         </p>
-      <% end %>
+        <% end %>
       </div>
     <% end %>
 
- 	  <div class="grid_1 navigation">
+    <div class="grid_1 navigation">
       <p>&nbsp;</p>
       <p>linux<br><br><br><br><br><br><br></p>
       <p>windows</p>
     </div>
-    
+
     <div class="clear"></div>
  
-  	<div class="grid_8 footer">
+    <div class="grid_8 footer">
       visualization: <a href="http://www.timlossen.com">tim lossen</a>
       &mdash; 
       data: <a href="http://aws.amazon.com/">amazon web services</a> 
       <br>
-  	  <i><sup>*</sup> times shown are <a href="http://en.wikipedia.org/wiki/UTC">UTC</a> (= london)</i>
-  	</div>
+      <i><sup>*</sup> times shown are UTC</i>
+    </div>
 
   </div>
   
   <div class="invisible">
-	  <a href="/favicon.ico">.</a>
-	  <a href="/amstock/amstock.swf">.</a>
-	  <a href="/amstock/settings.xml">.</a>
-	</div>
+    <a href="/favicon.ico">.</a>
+    <a href="/amstock/amstock.swf">.</a>
+    <a href="/amstock/settings.xml">.</a>
+  </div>
 	
   <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -103,5 +105,4 @@
   </script>
 
 </body>
-
 </html>

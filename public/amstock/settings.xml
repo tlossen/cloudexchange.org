@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
  <margins>0</margins>
- <font></font>
- <text_size></text_size>
+ <font>Helvetica</font>
+ <text_size>14</text_size>
  <text_color></text_color>
  <redraw></redraw>
  <add_time_stamp></add_time_stamp>
  <max_series>0</max_series>
- <max_grid_count>16</max_grid_count>
+ <max_grid_count>10</max_grid_count>
  <equal_spacing>false</equal_spacing>
  <start_on_axis></start_on_axis>
- <js_enabled></js_enabled>
+ <js_enabled>false</js_enabled>
  <interactive>true</interactive>
  <legend_position></legend_position>
  <legend_width></legend_width>
@@ -220,7 +220,7 @@
 <![CDATA[{close}]]>
       </date>
       <period key="false" title="false">
-<![CDATA[min: $ <b>{low}</b> - max: $ <b>{high}</b>]]>
+<![CDATA[{low} - {high}]]>
       </period>
       <date_comparing key="false" title="false">
 <![CDATA[]]>
@@ -250,7 +250,7 @@
   </x_axis>
   <legend>
    <milliseconds></milliseconds>
-   <seconds></seconds>
+   <seconds>month DD, hh:mm</seconds>
    <minutes></minutes>
    <hours></hours>
    <days>month DD, YYYY</days>
@@ -316,8 +316,8 @@
   </input>
   <periods>
    <period type="DD" count="1">24h</period>
-   <period type="DD" count="7">7d</period>
-   <period selected="true" type="MAX">all</period>
+   <period selected="true" type="DD" count="7">7d</period>
+   <period type="MAX">all</period>
   </periods>
   <zoom_to_end></zoom_to_end>
   <periods_title></periods_title>

@@ -13,13 +13,15 @@
   <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
 
   <style>
-    a { text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    body { margin-top: 2em; }
+    a { color: #666; text-decoration: none; }
+    a:hover, a:focus { background-color: #ffd6cc; }
     h1 { font-size: 350%; }
     h2 { font-size: 220%; }
     h3 { font-size: 110%; }
-    .navigation { margin-top: 2em; }
-    .footer { margin-top: 4em; font-size: 70%; text-align: right; }
+    .current { color: #f30; }
+    .navigation { margin-top: 2.5em; }
+    .footer { margin-top: 2em; font-size: 70%; text-align: right; }
     .invisible { display: none; }
   </style>
 </head>
@@ -62,7 +64,8 @@
         <p>
         <% @instances.each do |instance| %>
           <% which = "#{region}.#{system}.#{instance}" %>
-          <a href="/charts/<%= which %>.html"><%= instance %></a><br>
+          <% style = (@which == which) ? ' class="current"' : '' %>
+          <a <%= style %>href="/charts/<%= which %>.html"><%= instance %></a><br>
         <% end %>
         </p>
         <% end %>

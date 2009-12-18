@@ -2,7 +2,11 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title><%= @which %> &mdash; cloudexchange.org</title>
+  <meta name="author" content="Tim Lossen" />
+	<meta name="description" content="realtime charts of amazon ec2 spot prices" />
+	<meta name="keywords" content="amazon, aws, ec2, spot price, pricing, charts, visualization, cloud computing" />
+	<meta name="robots" content="all">
+  <title><%= @which %> &mdash; cloud exchange</title>
   <link rel="stylesheet" href="/css/reset.css" />
   <link rel="stylesheet" href="/css/text.css" />
   <link rel="stylesheet" href="/css/960.css" />
@@ -23,7 +27,6 @@
 
   	<div class="grid_12">
       <h1>cloud exchange</h1>     
-      
       <!--# block name="empty" --><!--# endblock -->
       <h2><%= @which %> &mdash; $<!--# include virtual="/data/<%= @which %>.txt" stub="empty" --></h2>
   	</div>

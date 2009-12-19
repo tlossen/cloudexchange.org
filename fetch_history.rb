@@ -61,7 +61,7 @@ def store(region, data)
     price = data[type].last[1]
     percent = (price / REGULAR_PRICE[which] * 100).round
     open("#{DATA_DIR}/#{which}.txt", 'w') do |file|
-      file.puts "#{'%.3f' % price} (#{percent}%)"
+      file.puts "#{'%.3f' % price} &mdash; #{percent}%"
     end
   end
 end

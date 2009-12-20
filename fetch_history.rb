@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'time'
-
-DATA_DIR = "/home/ubuntu/cloudexchange.org/www/data"
-#DATA_DIR = "/Users/tim/Code/cloudexchange.org/public/data"
+require 'rubygems'
+require 'twitter'
 
 REGULAR_PRICE = {
   'eu-west-1.linux.m1.small' => 0.095,
@@ -50,17 +49,39 @@ REGULAR_PRICE = {
   'us-west-1.windows.c1.xlarge' => 1.24,
 }
 
+def data_dir
+  ENV['DATA_DIR'] || raise('DATA_DIR is not set')
+end
+
+def tweet(which, price, percent)
+  password = open(File.join(File.dirname(__FILE__), '.twitter')).read.chomp
+  client = Twitter::Base.new(Twitter::HTTPAuth.new('cx_ticker', password))
+  message = "#{which} — $#{'%.3f' % price} — #{percent}% — http://cloudexchange.org/charts/#{which}.html #ec2 #spot_price"
+  puts message
+  client.update message
+rescue Crack::ParseError
+  # ignore - known issue
+end
+
+def old_price(which)
+  open("#{data_dir}/#{which}.txt").read.split[0].to_f
+rescue
+  nil
+end
+
 def store(region, data)
   data.keys.each do |type|
     which = "#{region}.#{type}"
-    open("#{DATA_DIR}/#{which}.csv", 'w') do |file|
+    open("#{data_dir}/#{which}.csv", 'w') do |file|
       data[type].each do |stamp, price|
         file.puts "#{stamp.strftime('%Y-%m-%d %H:%M:%S')},#{price}"
       end
     end
     price = data[type].last[1]
     percent = (price / REGULAR_PRICE[which] * 100).round
-    open("#{DATA_DIR}/#{which}.txt", 'w') do |file|
+    old_price = old_price(which)
+    tweet(which, price, percent) if old_price and old_price.to_s != price.to_s
+    open("#{data_dir}/#{which}.txt", 'w') do |file|
       file.puts "#{'%.3f' % price} &mdash; #{percent}%"
     end
   end
@@ -89,7 +110,6 @@ def fetch(region)
 
   data
 end
-
 
 ['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|   
   store(region, fetch(region))

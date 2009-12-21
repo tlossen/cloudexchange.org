@@ -56,7 +56,7 @@ end
 def tweet(which, price, percent)
   password = open(File.join(File.dirname(__FILE__), '.twitter')).read.chomp
   client = Twitter::Base.new(Twitter::HTTPAuth.new('cx_ticker', password))
-  message = "#{which} — $#{'%.3f' % price} — #{percent}% — http://cloudexchange.org/charts/#{which}.html #ec2 #spot_price"
+  message = "#{which} — $#{'%.3f' % price} — #{percent}% — http://cloudexchange.org/charts/#{which}.html #ec2_spot_price"
   puts message
   client.update message
 rescue Crack::ParseError

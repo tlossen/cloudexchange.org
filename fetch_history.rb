@@ -87,12 +87,27 @@ def store(region, data)
   end
 end
 
+def history_file(region)
+  "#{data_dir}/history.#{region}.txt"
+end
+
 def fetch(region)
   puts "#{Time.now} - fetching #{region}"
+  last = Time.parse(`tail -1 #{history_file(region)}`.split[2])
 
+  open(history_file(region), 'a') do |file|
+    `ec2-describe-spot-price-history --url https://#{region}.ec2.amazonaws.com --start-time #{last.strftime('%Y-%m-%dT%H:%M:%S')}`.each do |line|
+      if Time.parse(line.split[2]) > last
+        file.puts line
+        puts line
+      end
+    end
+  end
+end
+
+def parse(region)
   data = {}
-  ENV['EC2_URL'] = "https://#{region}.ec2.amazonaws.com"
-  `ec2-describe-spot-price-history`.each do |line|
+  open(history_file(region), 'r').each do |line|
     col = line.split
     price = col[1].to_f
     stamp = Time.parse(col[2]).utc
@@ -103,14 +118,14 @@ def fetch(region)
     values << [stamp - 1, values.last[1]] unless values.empty?
     values << [stamp, price]
   end
-
   data.each do |type, values|
     values << [Time.now.utc, values.last[1]]
   end
-
   data
 end
 
-['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|   
-  store(region, fetch(region))
+['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|
+  fetch(region)
+  data = parse(region)
+  store(region, data)
 end

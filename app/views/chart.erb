@@ -1,0 +1,44 @@
+<div class="grid_12">
+  <!--# block name="empty" --><!--# endblock -->
+  <h2><%= @which %> &mdash; $<!--# include virtual="/data/<%= @which %>.txt" stub="empty" --></h2>
+</div>
+
+<div class="clear"></div>
+
+<div class="grid_8">
+  <script type="text/javascript" src="/amstock/swfobject.js"></script>
+  <div id="flashcontent">
+    <strong>You need to upgrade your Flash Player</strong>
+  </div>
+
+  <script type="text/javascript">
+    var so = new SWFObject("/amstock/amstock.swf", "amstock", "620", "400", "8", "#FFFFFF");
+    so.addVariable("path", "/data/");
+    so.addVariable("settings_file", encodeURIComponent("/amstock/settings.xml"));
+    so.addVariable("preloader_color", "#999999");
+    so.addVariable("additional_chart_settings", "<settings><data_sets><data_set did='0'><file_name><%= @which %>.csv</file_name></data_set></data_sets></settings>");
+    so.write("flashcontent");
+  </script>
+  <a class="csv" href="/data/<%= @which %>.csv">download data</a>
+</div>
+
+<% REGIONS.each do |region| %>
+  <div class="grid_1 navigation">
+    <p><%= region %></p>
+    <% SYSTEMS.each do |system| %>
+    <p>
+    <% INSTANCES.each do |instance| %>
+      <% which = "#{region}.#{system}.#{instance}" %>
+      <% style = (@which == which) ? ' class="current"' : '' %>
+      <a <%= style %>href="/charts/<%= which %>.html"><%= instance %></a><br>
+    <% end %>
+    </p>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="grid_1 navigation">
+  <p>&nbsp;</p>
+  <p>linux<br><br><br><br><br><br><br></p>
+  <p>windows</p>
+</div>

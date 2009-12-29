@@ -60,7 +60,17 @@
     </columns>
     <data></data>
    </csv>
-   <events></events>
+   <events>
+     <!-- <event>
+       <bullet>horizontal_line_dashed</bullet>
+       <border_color>000000</border_color>
+       <text_color>00ff00</text_color>
+       <value>0</value>
+       <percent_value>50</percent_value>
+       <date>2009-12-18 01:48:35</date>
+       <letter>foo</letter>
+     </event> -->
+   </events>
   </data_set>
  </data_sets>
  <charts>

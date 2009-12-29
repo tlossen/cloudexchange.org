@@ -1,0 +1,35 @@
+<events>
+  <event>
+    <graph_id>none</graph_id>
+    <y_axis>right</y_axis>
+    <bullet>horizontal_line_dashed</bullet>
+    <border_color>000000</border_color>
+    <border_alpha>50</border_alpha>
+    <text_color>000000</text_color>    
+    <letter>Bottom barrier</letter>
+    <value>80</value>
+    <percent_value>-6</percent_value>
+  </event>
+  
+  <event>
+    <graph_id>none</graph_id>
+    <y_axis>right</y_axis>
+    <bullet>horizontal_line_dashed</bullet>
+    <border_color>000000</border_color>
+    <border_alpha>50</border_alpha>
+    <text_color>000000</text_color>    
+    <letter>Top barrier</letter>
+    <value>195</value>
+    <percent_value>128.63</percent_value>
+  </event> 
+  
+  <event>
+    <graph_id/>    
+    <bullet>vertical_line_dashed</bullet>
+    <date>2007-01-03</date>
+    <border_color>000000</border_color>
+    <border_alpha>50</border_alpha>       
+    <description>The date when the observation started</description>
+  </event>    
+    
+</events>

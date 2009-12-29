@@ -1,0 +1,31 @@
+<div class="grid_12">
+  <h2>ec2 spot prices</h2>
+</div>
+
+<div class="clear"></div>
+
+<div class="grid_2 big">
+  <% SYSTEMS.each do |system| %>
+    <b><%= system %></b><br><br>
+    <% INSTANCES.each do |instance| %>
+      <%= instance %><br>
+    <% end %>
+    <br>
+  <% end %>
+</div>
+
+<% REGIONS.each do |region| %>
+  <div class="grid_2 big right">
+    <% SYSTEMS.each do |system| %>
+      <%= region %><br><br>
+      <% INSTANCES.each do |instance| %>
+        <% which = "#{region}.linux.#{instance}" %>
+        <a href="/charts/<%= which %>.html">$0.015</a><br>
+      <% end %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="clear"></div>  
+

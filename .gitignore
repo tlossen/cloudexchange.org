@@ -9,6 +9,4 @@ tmtags
 .twitter
 GeoIP.dat
 cron.log
-www
-public/data
 app/public/data

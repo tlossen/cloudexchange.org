@@ -53,10 +53,19 @@ def data_dir
   ENV['DATA_DIR'] || raise('DATA_DIR is not set')
 end
 
+def replace_file(path)
+  tmpfile = "/tmp/ruby.#{rand}"
+  open(tmpfile, 'w') do |file|
+    yield file
+  end
+  `mv #{tmpfile} #{path}`
+end
+
 def tweet(which, price, percent)
   password = open(File.join(File.dirname(__FILE__), '.twitter')).read.chomp
   client = Twitter::Base.new(Twitter::HTTPAuth.new('cx_ticker', password))
-  message = "#{which} — $#{'%.3f' % price} — #{percent}% — http://cloudexchange.org/charts/#{which}.html #ec2_spot_price"
+  url = "http://cloudexchange.org/charts/#{which}.html"
+  message = "#{which} — $#{'%.3f' % price} — #{percent}% — #{url} #ec2_spot_price"
   puts message
   client.update message
 rescue Crack::ParseError
@@ -72,7 +81,7 @@ end
 def store(region, data)
   data.keys.each do |type|
     which = "#{region}.#{type}"
-    open("#{data_dir}/#{which}.csv", 'w') do |file|
+    replace_file("#{data_dir}/#{which}.csv") do |file|
       data[type].each do |stamp, price|
         file.puts "#{stamp.strftime('%Y-%m-%d %H:%M:%S')},#{price}"
       end
@@ -81,7 +90,7 @@ def store(region, data)
     percent = (price / REGULAR_PRICE[which] * 100).round
     old_price = old_price(which)
     tweet(which, price, percent) if old_price and old_price.to_s != price.to_s
-    open("#{data_dir}/#{which}.txt", 'w') do |file|
+    replace_file("#{data_dir}/#{which}.txt") do |file|
       file.puts "#{'%.3f' % price} &mdash; #{percent}%"
     end
   end
@@ -96,7 +105,9 @@ def fetch(region)
   last = Time.parse(`tail -1 #{history_file(region)}`.split[2])
 
   open(history_file(region), 'a') do |file|
-    `ec2-describe-spot-price-history --url https://#{region}.ec2.amazonaws.com --start-time #{last.strftime('%Y-%m-%dT%H:%M:%S')}`.each do |line|
+    url = "https://#{region}.ec2.amazonaws.com"
+    start = last.strftime('%Y-%m-%dT%H:%M:%S')
+    `ec2-describe-spot-price-history --url #{url} --start-time #{start}`.each do |line|
       if Time.parse(line.split[2]) > last
         file.puts line
         puts line
@@ -124,8 +135,24 @@ def parse(region)
   data
 end
 
+def store_spot_prices(data)
+  replace_file("#{data_dir}/spot.csv") do |file|
+    data.each do |type, price|
+      file.puts "#{type},#{price}"
+    end
+  end
+end
+
+current = {}
 ['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|
   fetch(region)
   data = parse(region)
   store(region, data)
+  
+  data.keys.each do |type|
+    which = "#{region}.#{type}"
+    price = data[type].last[1]
+    current[which] = price
+  end
 end
+store_spot_prices(current)

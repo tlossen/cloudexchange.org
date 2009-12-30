@@ -16,6 +16,16 @@ end
 
 get '/charts/:which.html' do
   @which = params[:which]
+  @spot_price = spot_price_map
   erb :chart
+end
+
+def spot_price_map
+  result = {}
+  open("#{File.dirname(__FILE__)}/public/data/spot.csv").each do |line|
+    key, value = *line.split(',')
+    result[key] = value.to_f
+  end
+  result
 end
 

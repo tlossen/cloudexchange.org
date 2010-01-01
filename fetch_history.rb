@@ -73,9 +73,10 @@ rescue Crack::ParseError
 end
 
 def old_price(which)
-  open("#{data_dir}/#{which}.txt").read.split[0].to_f
-rescue
-  nil
+  open("#{data_dir}/spot.csv").each do |line|
+    key, value = *line.split(',')
+    return value.to_f if key == which
+  end
 end
 
 def store(region, data)
@@ -90,9 +91,6 @@ def store(region, data)
     percent = (price / REGULAR_PRICE[which] * 100).round
     old_price = old_price(which)
     tweet(which, price, percent) if old_price and old_price.to_s != price.to_s
-    replace_file("#{data_dir}/#{which}.txt") do |file|
-      file.puts "#{'%.3f' % price} &mdash; #{percent}%"
-    end
   end
 end
 

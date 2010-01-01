@@ -1,5 +1,5 @@
 <div class="grid_12">
-  <h2><%= @which %> &mdash; $<%= '%.3f' % @spot_price[@which] %></h2>
+  <h2><%= display(@which) %> &mdash; $ <%= spot_price(@which) %></h2>
 </div>
 
 <div class="clear"></div>
@@ -37,8 +37,8 @@
       <%= region %><br><br>
       <% INSTANCES.each do |instance| %>
         <% which = "#{region}.#{system}.#{instance}" %>
-        <% style = (@which == which) ? ' class=" current"' : '' %>
-        <a <%= style %>href="/charts/<%= which %>.html"><%= '%.3f' % @spot_price[which] %></a><br>
+        <% style = (@which == which) ? ' class="current"' : '' %>
+        <a <%= style %>href="/charts/<%= which %>.html"><%= spot_price(which) %></a><br>
       <% end %>
       <br><br>
     <% end %>

@@ -3,7 +3,6 @@ EC2_URL=https://eu-west-1.ec2.amazonaws.com
 EC2_PRIVATE_KEY=/home/ubuntu/.ec2/pk-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
 EC2_CERT=/home/ubuntu/.ec2/cert-TM374PQ4KXOLLOWN5DUYXYB3M3EX3IQP.pem
 EC2_HOME=/home/ubuntu/ec2-api-tools-1.3-46266
-DATA_DIR=/home/ubuntu/cloudexchange.org/app/public/data
 PATH=/home/ubuntu/ec2-api-tools-1.3-46266/bin:/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin
 
-*/1 * * * * /home/ubuntu/cloudexchange.org/fetch_history.rb >> /home/ubuntu/cloudexchange.org/cron.log 2>&1
+*/1 * * * * /home/ubuntu/cloudexchange.org/app/updater.rb >> /home/ubuntu/cloudexchange.org/cron.log 2>&1

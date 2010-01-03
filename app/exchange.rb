@@ -1,6 +1,5 @@
 require 'time'
 require 'rubygems'
-require 'twitter'
 
 class Exchange
 
@@ -72,21 +71,7 @@ private
           file.puts "#{stamp.strftime('%Y-%m-%d %H:%M:%S')},#{price}"
         end
       end
-      price = data[type].last[1]
-      percent = (price / regular_price(which) * 100).round
-      old_price = spot_price(which)
-      tweet(which, price, percent) if old_price and old_price.to_s != price.to_s
     end
-  end
-
-  def tweet(which, price, percent)
-    password = open(File.join(File.dirname(__FILE__), '..', '.twitter')).read.chomp
-    client = Twitter::Base.new(Twitter::HTTPAuth.new('cx_ticker', password))
-    url = "http://cloudexchange.org/charts/#{which}.html"
-    message = "#{which} — $#{'%.3f' % price} — #{percent}% — #{url}"
-    puts message
-    client.update message
-  rescue Crack::ParseError => ignored
   end
 
   def store_prices(data)

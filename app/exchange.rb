@@ -33,7 +33,7 @@ private
 
   def fetch_region(region)
     puts "#{Time.now} - fetching #{region}"
-    last = Time.parse(`tail -1 #{history_file(region)}`.split[2]).utc
+    last = last_fetched(region)
     open(history_file(region), 'a') do |file|
       ticks = ec2(region).describe_spot_price_history(:start_time => last).spotPriceHistorySet.item
       ticks.each do |t|
@@ -44,6 +44,12 @@ private
         end
       end
     end
+  end
+  
+  def last_fetched(region)
+    Time.parse(`tail -1 #{history_file(region)}`.split[2]).utc
+  rescue
+    Time.parse('2009-11-30T00:00:00.000Z')
   end
   
   def ec2(region)

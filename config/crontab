@@ -1,1 +1,1 @@
-*/1 * * * * /bin/bash -l -c 'cd cloudexchange.org && app/updater.rb >>cron.log 2>&1'
+*/1 * * * * /bin/bash -l -c 'cd domains/cloudexchange.org && app/updater.rb >>cron.log 2>&1'

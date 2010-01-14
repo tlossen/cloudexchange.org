@@ -38,7 +38,7 @@
       <% INSTANCES.each do |instance| %>
         <% which = "#{region}.#{system}.#{instance}" %>
         <% style = (@which == which) ? ' class="current"' : '' %>
-        <a <%= style %>href="/charts/<%= which %>.html"><%= spot_price(which) %> <span class="small"><%= percent(which) %>%</span></a><br>
+        <a <%= style %>href="/charts/<%= which %>.html"><%= spot_price(which) %> | <%= percent(which) %></a><br>
       <% end %>
       <br><br>
     <% end %>

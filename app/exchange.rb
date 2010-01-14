@@ -1,5 +1,7 @@
 require 'time'
 require 'rubygems'
+require 'AWS'
+
 
 class Exchange
 
@@ -31,17 +33,23 @@ private
 
   def fetch_region(region)
     puts "#{Time.now} - fetching #{region}"
-    last = Time.parse(`tail -1 #{history_file(region)}`.split[2])
+    last = Time.parse(`tail -1 #{history_file(region)}`.split[2]).utc
     open(history_file(region), 'a') do |file|
-      url = "https://#{region}.ec2.amazonaws.com"
-      start = last.strftime('%Y-%m-%dT%H:%M:%S')
-      `ec2-describe-spot-price-history --url #{url} --start-time #{start}`.each do |line|
-        if Time.parse(line.split[2]) > last
+      ticks = ec2(region).describe_spot_price_history(:start_time => last).spotPriceHistorySet.item
+      ticks.each do |t|
+        if Time.parse(t.timestamp).utc > last 
+          line = "SPOTINSTANCEPRICE\t#{t.spotPrice}\t#{t.timestamp}\t#{t.instanceType}\t#{t.productDescription}"
           file.puts line
           puts line
         end
       end
     end
+  end
+  
+  def ec2(region)
+    id, key = *open('.amazon').read.split(':')
+    server = "#{region}.ec2.amazonaws.com"
+    AWS::EC2::Base.new(:access_key_id => id, :secret_access_key => key, :server => server)
   end
 
   def parse_region(region)

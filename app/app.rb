@@ -6,7 +6,7 @@ require File.join(File.dirname(__FILE__), 'exchange')
 
 REGIONS = ['us-west-1', 'us-east-1', 'eu-west-1']
 SYSTEMS = ['linux', 'windows']
-INSTANCES = ['m1.small', 'm1.large', 'm1.xlarge', 'c1.medium', 'c1.xlarge', 'm2.2xlarge', 'm2.4xlarge']
+INSTANCES = ['m1.small', 'm1.large', 'm1.xlarge', 'c1.medium', 'c1.xlarge', 'm2.xlarge', 'm2.2xlarge', 'm2.4xlarge']
 
 get '/' do
   @which = 'eu-west-1.linux.m1.small'

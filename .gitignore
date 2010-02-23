@@ -6,8 +6,8 @@
 tmtags
 
 ## OTHER
-.twitter
 .amazon
 GeoIP.dat
 cron.log
+access.log
 app/public/data

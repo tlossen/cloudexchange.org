@@ -327,6 +327,7 @@
   <periods>
    <period type="DD" count="1">24h</period>
    <period selected="true" type="DD" count="7">7d</period>
+   <period type="DD" count="30">1m</period>
    <period type="MAX">all</period>
   </periods>
   <zoom_to_end></zoom_to_end>

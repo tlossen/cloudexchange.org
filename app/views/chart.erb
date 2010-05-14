@@ -4,43 +4,44 @@
 
 <div class="clear"></div>
 
-<div class="grid_8">
-  <script type="text/javascript" src="/amstock/swfobject.js"></script>
-  <div id="flashcontent">
-    <strong>You need to upgrade your Flash Player</strong>
-  </div>
-
-  <script type="text/javascript">
-    var so = new SWFObject("/amstock/amstock.swf", "amstock", "620", "460", "8", "#FFFFFF");
-    so.addVariable("path", "/data/");
-    so.addVariable("settings_file", encodeURIComponent("/amstock/settings.xml"));
-    so.addVariable("preloader_color", "#999999");
-    so.addVariable("additional_chart_settings", "<settings><data_sets><data_set did='0'><file_name><%= @which %>.csv</file_name></data_set></data_sets></settings>");
-    so.write("flashcontent");
-  </script>
-  <a class="csv" href="/data/<%= @which %>.csv">download data</a>
-</div>
-
 <div class="grid_1 navigation">
   <% SYSTEMS.each do |system| %>
-    <b><%= system %></b><br><br>
+    <b><%= system.sub('windows', 'win') %></b><br><br>
     <% INSTANCES.each do |instance| %>
-      <%= instance %><br>
+      <%= short_instance(instance) %><br>
     <% end %>
-    <br><br>
+    <br>
   <% end %>
 </div>
 
 <% REGIONS.each do |region| %>
   <div class="grid_1 navigation right">
     <% SYSTEMS.each do |system| %>
-      <%= region %><br><br>
+      <%= short_region(region) %><br><br>
       <% INSTANCES.each do |instance| %>
         <% which = "#{region}.#{system}.#{instance}" %>
         <% style = (@which == which) ? ' class="current"' : '' %>
         <a <%= style %>href="/charts/<%= which %>.html"><%= spot_price(which) %> | <%= percent(which) %></a><br>
       <% end %>
-      <br><br>
+      <br>
     <% end %>
   </div>
 <% end %>
+
+<div class="grid_7 right">
+  <script type="text/javascript" src="/amstock/swfobject.js"></script>
+  <div id="flashcontent">
+    <strong>You need to upgrade your Flash Player</strong>
+  </div>
+
+  <script type="text/javascript">
+    var so = new SWFObject("/amstock/amstock.swf", "amstock", "500", "434", "8", "#FFFFFF");
+    so.addVariable("path", "/data/");
+    so.addVariable("settings_file", encodeURIComponent("/amstock/settings.xml"));
+    so.addVariable("preloader_color", "#999999");
+    so.addVariable("additional_chart_settings", "<settings><data_sets><data_set did='0'><file_name><%= @which %>.csv</file_name></data_set></data_sets></settings>");
+    so.write("flashcontent");
+  </script>
+  <!-- <a class="csv" href="/data/<%= @which %>.csv">download data</a> -->
+</div>
+

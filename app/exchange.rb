@@ -12,7 +12,7 @@ class Exchange
   def spot_price(which)
     spot_price_map[which]
   end
-  
+
   def update_prices
     current = {}
     ['us-east-1', 'us-west-1', 'eu-west-1', 'ap-southeast-1'].each do |region|
@@ -37,7 +37,7 @@ private
     open(history_file(region), 'a') do |file|
       ticks = ec2(region).describe_spot_price_history(:start_time => last).spotPriceHistorySet.item
       ticks.each do |t|
-        if Time.parse(t.timestamp).utc > last 
+        if Time.parse(t.timestamp).utc > last
           line = "SPOTINSTANCEPRICE\t#{t.spotPrice}\t#{t.timestamp}\t#{t.instanceType}\t#{t.productDescription}"
           file.puts line
           puts line
@@ -45,13 +45,13 @@ private
       end
     end
   end
-  
+
   def last_fetched(region)
     Time.parse(`tail -1 #{history_file(region)}`.split[2]).utc
   rescue
     Time.parse('2009-11-30T00:00:00.000Z')
   end
-  
+
   def ec2(region)
     id, key = *open('.amazon').read.split(':')
     server = "#{region}.ec2.amazonaws.com"
@@ -95,7 +95,7 @@ private
       end
     end
   end
-  
+
   def regular_price_map
     @regular_price_map ||= price_map('regular')
   end
@@ -112,7 +112,7 @@ private
     end
     result
   end
-  
+
   def history_file(region)
     "#{data_dir}/history.#{region}.txt"
   end

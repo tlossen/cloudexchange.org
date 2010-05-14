@@ -15,7 +15,7 @@ class Exchange
   
   def update_prices
     current = {}
-    ['us-east-1', 'us-west-1', 'eu-west-1'].each do |region|
+    ['us-east-1', 'us-west-1', 'eu-west-1', 'ap-southeast-1'].each do |region|
       fetch_region(region)
       data = parse_region(region)
       store_region(region, data)

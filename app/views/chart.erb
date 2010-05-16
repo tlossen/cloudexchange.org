@@ -35,13 +35,13 @@
   </div>
 
   <script type="text/javascript">
-    var so = new SWFObject("/amstock/amstock.swf", "amstock", "500", "434", "8", "#FFFFFF");
+    var so = new SWFObject("/amstock/amstock.swf", "amstock", "500", "430", "8", "#FFFFFF");
     so.addVariable("path", "/data/");
     so.addVariable("settings_file", encodeURIComponent("/amstock/settings.xml"));
     so.addVariable("preloader_color", "#999999");
     so.addVariable("additional_chart_settings", "<settings><data_sets><data_set did='0'><file_name><%= @which %>.csv</file_name></data_set></data_sets></settings>");
     so.write("flashcontent");
   </script>
-  <!-- <a class="csv" href="/data/<%= @which %>.csv">download data</a> -->
+  <a class="csv" href="/data/<%= @which %>.csv">download data</a>
 </div>
 

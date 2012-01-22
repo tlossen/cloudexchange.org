@@ -1,0 +1,79 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="Tim Lossen" />
+  <meta name="description" content="realtime charts of amazon ec2 spot prices" />
+  <meta name="keywords" content="amazon, aws, ec2, spot price, pricing, charts, visualization, cloud computing" />
+  <meta name="robots" content="all" />
+  <title><%= display(@which) %> &mdash; cloud exchange</title>
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/960.css" />
+  <link rel="icon" type="image/ico" href="/favicon.ico" />
+  <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+
+  <style>
+    body { margin-top: 30px; font: 13px/1.5 'Helvetica Neue', Arial, sans-serif; }
+    a { color: #666; text-decoration: none; }
+    a:hover, a:focus { background-color: #ffd6cc; }
+    a.csv { background: url(/img/csv.gif) no-repeat left center; padding-left: 25px; }
+    h1 { font-size: 350%; margin-bottom: 12px; }
+    h2 { font-size: 220%; margin-bottom: 40px; }
+    .current { color: #f30; }
+    .navigation { margin-top: 3px; }
+    .small { font-size: 85%; }
+    .right { text-align: right; }
+  </style>
+</head>
+
+<body>
+  <div class="container_12">
+    <div class="grid_12">
+      <h1>cloud exchange</h1>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="grid_8">
+      <p>
+        when amazon started to offer <a href="http://aws.amazon.com/ec2/spot-instances/">spot instances</a> 
+        in december 2009, i quickly hacked a little sinatra app that displayed the spot price history as 
+        interactive flash charts.
+        <b>unfortunately, due to time constraints i cannot maintain this website any longer.</b>
+      </p>  
+      
+      <p>
+        if you are curious how the charts looked like, have a look at these
+        <a href="http://www.flickr.com/photos/tlossen/sets/72157622914147115/">screenshots</a>.
+        if you want to build something similar, feel free to use 
+        <a href="https://github.com/tlossen/cloudexchange.org">my code</a> as a starting point.
+      </p>
+      
+      <p>
+        you might also want to check out the
+        <a href="http://www.cs.technion.ac.il/users/wwwb/cgi-bin/tr-info.cgi/2011/CS/CS-2011-09">interesting paper</a>
+        by orna ben-yehuda et. al., which tries to reverse-engineer the pricing algorithm used by amazon, and concludes
+        that prices <i>"are usually not market-driven as sometimes previously assumed. Rather, they are typically generated 
+        <b>at random</b> from within a tight price interval"</i>.
+      </p>
+      
+      <p>
+        <a href="http://tim.lossen.de">tim</a>, january 2012
+      </p>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-2260866-6");
+      pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+
+</body>
+</html>
+
+
